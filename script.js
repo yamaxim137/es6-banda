@@ -117,6 +117,11 @@ function display(visibleId/*выбирается либо:"information" либо
 class BaseClass{
   constructor(firstName){
     this.firstName = firstName;
+    this.surName = surName;
+    this.birthDay = birthDay;
+    this.firstDay = firstDay;
+    this.adres = adres;
+    this.phone = phone;
   }
 
   get firstName(){
