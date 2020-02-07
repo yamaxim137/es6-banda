@@ -115,7 +115,7 @@ function display(visibleId/*выбирается либо:"information" либо
 //родительский класс гет сет
 
 class BaseClass{
-  constructor(firstName){
+  constructor(firstName,surName,birthDay,firstDay,adres,phone){
     this.firstName = firstName;
     this.surName = surName;
     this.birthDay = birthDay;
@@ -139,8 +139,8 @@ class BaseClass{
 //наследники
 
 class OneExtendsClass extends BaseClass{
-  constructor(firstName, type1, type2){
-    super(firstName);
+  constructor(firstName,surName,birthDay,firstDay,adres,phone, type1, type2){
+    super(firstName,surName,birthDay,firstDay,adres,phone);
     this.type1 = type1;
     this.type2 = type2;
     this.type = 'killer';
@@ -159,8 +159,8 @@ class OneExtendsClass extends BaseClass{
 }
 
 class TwoExtendsClass extends BaseClass{
-  constructor(firstName, type4, type3){
-    super(firstName);
+  constructor(firstName,surName,birthDay,firstDay,adres,phone, type4, type3){
+    super(firstName,surName,birthDay,firstDay,adres,phone);
     this.type4 = type4;
     this.type3 = type3;
     this.type = 'sniper';
