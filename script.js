@@ -1,7 +1,12 @@
 //редактирование данных в одной персоне
 function editBandit(i){
   display("create_person");
-  document.getElementById("textFirstName").value=  arrBandits[i].firstName;
+  document.getElementById("textFirstName").value = arrBandits[i].firstName;
+  document.getElementById("textSurtName").value = arrBandits[i].surName;
+  document.getElementById("textBirthDay").value = arrBandits[i].birthDay;
+  document.getElementById("textFirstDay").value = arrBandits[i].surName;
+  document.getElementById("textAdres").value = arrBandits[i].adres;
+  document.getElementById("textPhone").value = arrBandits[i].phone;
   deleteBandit(i,arrBandits);
   document.getElementById("mainMenu").style.display="none";
 }
@@ -49,6 +54,11 @@ function printInfo(arrBandits) {
 
     form[0].innerHTML+='<div class="text_description">'+
       '<div class="text_name " id="details'+i+'">'+arrBandits[i].firstName+'</div>'+
+      '<div class="text_name " id="details'+i+'">'+arrBandits[i].surName+'</div>'+
+      '<div class="text_name " id="details'+i+'">'+arrBandits[i].birthDay+'</div>'+
+      '<div class="text_name " id="details'+i+'">'+arrBandits[i].firstDay+'</div>'+
+      '<div class="text_name " id="details'+i+'">'+arrBandits[i].adres+'</div>'+
+      '<div class="text_name " id="details'+i+'">'+arrBandits[i].phone+'</div>'+
       '<div class="text_name " id="edit'+i+'">Редактировать</div>'+
       '<div class="text_name " id="remove'+i+'">Удалить</div>'+
       '</div>';
@@ -116,12 +126,12 @@ function display(visibleId/*выбирается либо:"information" либо
 
 class BaseClass{
   constructor(firstName,surName,birthDay,firstDay,adres,phone){
-    this.firstName = firstName;
-    this.surName = surName;
-    this.birthDay = birthDay;
-    this.firstDay = firstDay;
-    this.adres = adres;
-    this.phone = phone;
+    this._firstName = firstName;
+    this._surName = surName;
+    this._birthDay = birthDay;
+    this._firstDay = firstDay;
+    this._adres = adres;
+    this._phone = phone;
   }
 
   get firstName(){
@@ -134,6 +144,61 @@ class BaseClass{
     } 
     this._firstName = value;
   }
+
+  get surName(){
+    return this._surName;
+  }
+
+  set surName(value){
+    if (value.length == "") {
+      alert("Введите surName");
+    } 
+    this._surName = value;
+  }
+
+  get birthDay(){
+    return this._birthDay;
+  }
+
+  set birthDay(value){
+    if (value.length == "") {
+      alert("Введите birthDay");
+    } 
+    this._birthDay = value;
+  }
+
+  get firstDay(){
+    return this._firstDay;
+  }
+
+  set firstDay(value){
+    if (value.length == "") {
+      alert("Введите firstDay");
+    } 
+    this._firstDay = value;
+  }
+
+  get adres(){
+    return this._adres;
+  }
+
+  set adres(value){
+    if (value.length == "") {
+      alert("Введите adres");
+    } 
+    this._adres = value;
+  }
+
+  get phone(){
+    return this._phone;
+  }
+
+  set phone(value){
+    if (value.length == "") {
+      alert("Введите phone");
+    } 
+    this._phone = value;
+  }  
 }
 
 //наследники
@@ -141,9 +206,9 @@ class BaseClass{
 class OneExtendsClass extends BaseClass{
   constructor(firstName,surName,birthDay,firstDay,adres,phone, type1, type2){
     super(firstName,surName,birthDay,firstDay,adres,phone);
-    this.type1 = type1;
-    this.type2 = type2;
-    this.type = 'killer';
+    this._type1 = type1;
+    this._type2 = type2;
+    this._type = 'killer';
   }
 
   // get firstName(){
@@ -161,9 +226,9 @@ class OneExtendsClass extends BaseClass{
 class TwoExtendsClass extends BaseClass{
   constructor(firstName,surName,birthDay,firstDay,adres,phone, type4, type3){
     super(firstName,surName,birthDay,firstDay,adres,phone);
-    this.type4 = type4;
-    this.type3 = type3;
-    this.type = 'sniper';
+    this._type4 = type4;
+    this._type3 = type3;
+    this._type = 'sniper';
   }
 
   // get firstName(){
@@ -197,11 +262,11 @@ let arrBandits = []; // массив из персон
 
 
 //статичные 
-let bandit1 = new OneExtendsClass("John", 123, 123);
+let bandit1 = new OneExtendsClass("John", "Smith", "10.02.1991", "25.12.2005");
 arrBandits.push(bandit1); 
-let bandit2 = new TwoExtendsClass("Den", 123, 123);
+let bandit2 = new TwoExtendsClass("Den", "Simons", 123);
 arrBandits.push(bandit1);
-let bandit3 = new OneExtendsClass("Pit", 123, 123);
+let bandit3 = new OneExtendsClass("Pit", "Bush", 123);
 arrBandits.push(bandit1);
 display("information");
 printInfo(arrBandits);
@@ -219,28 +284,38 @@ printInfo(arrBandits);
 document.getElementById("createPerson").addEventListener("click", function() {
   document.getElementById("mainMenu").style.display="";
 
-
+  let initBandit = () => {
+    printInfo(arrBandits);
+    display("information");
+    alert("Добавил нового");
+  }
 
   let firstName = document.getElementById("textFirstName").value;
+  let surName = document.getElementById("textSurName").value;
+  let birthDay = document.getElementById("textBirthDay").value;
+  let firstDay = document.getElementById("textFirstDay").value;
+  let adres = document.getElementById("textAdres").value;
+  let phone = document.getElementById("textPhone").value;
+
   let type = checkRadio();
    switch (type) {
     case "killer":
-      arrBandits[arrBandits.length] = new OneExtendsClass(firstName, /*123, 123*/);
-      printInfo(arrBandits);
-      display("information");
-      alert("Добавил нового");
+      arrBandits[arrBandits.length] = new OneExtendsClass(firstName,surName,birthDay,firstDay,adres,phone);
+      initBandit();
     break;
     case "sniper":
-      arrBandits[arrBandits.length] = new TwoExtendsClass(firstName);
-      printInfo(arrBandits);
-      display("information");
-      alert("Добавил нового");
+      arrBandits[arrBandits.length] = new TwoExtendsClass(firstName,surName,birthDay,firstDay,adres,phone);
+      initBandit();
+      // printInfo(arrBandits);
+      // display("information");
+      // alert("Добавил нового");
       break;
     default :
-      arrBandits[arrBandits.length] = new OneExtendsClass(firstName);
-      printInfo(arrBandits);
-      display("information");
-      alert("Добавил нового");
+      arrBandits[arrBandits.length] = new OneExtendsClass(firstName,surName,birthDay,firstDay,adres,phone);
+      initBandit();
+      // printInfo(arrBandits);
+      // display("information");
+      // alert("Добавил нового");
   } 
 });
 
