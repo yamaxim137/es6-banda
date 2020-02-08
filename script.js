@@ -32,6 +32,13 @@ function printDetailedInfo(i){
         '<div class="elem">'+arrBandits[i].firstName+'</div>'+
       '</div>'+
     '</div><br>'+
+    '<div class="details">'+
+            '<div class="elem">Фамилия</div><div class="elem">'+arrBandits[i].surName+'</div>'+
+            '<div class="elem">Родился</div><div class="elem">'+arrBandits[i].birthDay+'</div>'+
+            '<div class="elem">Принят</div><div class="elem">'+arrBandits[i].firstDay+'</div>'+
+            '<div class="elem">адрес</div><div class="elem">'+arrBandits[i].adres+'</div>'+
+            '<div class="elem">телефон</div><div class="elem">'+arrBandits[i].phone+'</div>'+
+          '</div>'+
     '<input type="button" class="buttons" id="mainMenu2" value="Главное меню">';
 
   document.getElementById("mainMenu2").addEventListener("click",function() {
@@ -86,10 +93,10 @@ function printInfo(arrBandits) {
     });
     document.getElementById(remove).addEventListener("click",function(){
       if (confirm("Вы уверены, что хотите удалить инофрмацию о " +
-      arrBandits[i].firstName + " " +arrBandits[i].secondName+"?")) {
+      arrBandits[i].firstName + " " +arrBandits[i].surName+"?")) {
           deleteBandit(i,arrBandits);
       } else {
-
+          alert("не удаляем ! - отмена удаления");
       }
 
     });
@@ -262,12 +269,12 @@ let arrBandits = []; // массив из персон
 
 
 //статичные 
-let bandit1 = new OneExtendsClass("John", "Smith", "10.02.1991", "25.12.2005");
+let bandit1 = new OneExtendsClass("John", "Smith", "10.02.1991", "25.12.2005", "Сурганова, 3/24", "+48596582571");
 arrBandits.push(bandit1); 
-let bandit2 = new TwoExtendsClass("Den", "Simons", 123);
-arrBandits.push(bandit1);
-let bandit3 = new OneExtendsClass("Pit", "Bush", 123);
-arrBandits.push(bandit1);
+let bandit2 = new TwoExtendsClass("Den", "Simons", "23.08.1975", "05.11.2004", "Мележа, 32/2", "+375445690403");
+arrBandits.push(bandit2);
+let bandit3 = new OneExtendsClass("Pit", "Bush", "13.10.1988", "01.09.2001", "Коласа, 18/18", "+74953331564");
+arrBandits.push(bandit3);
 display("information");
 printInfo(arrBandits);
 
@@ -306,16 +313,10 @@ document.getElementById("createPerson").addEventListener("click", function() {
     case "sniper":
       arrBandits[arrBandits.length] = new TwoExtendsClass(firstName,surName,birthDay,firstDay,adres,phone);
       initBandit();
-      // printInfo(arrBandits);
-      // display("information");
-      // alert("Добавил нового");
-      break;
+    break;
     default :
       arrBandits[arrBandits.length] = new OneExtendsClass(firstName,surName,birthDay,firstDay,adres,phone);
       initBandit();
-      // printInfo(arrBandits);
-      // display("information");
-      // alert("Добавил нового");
   } 
 });
 
