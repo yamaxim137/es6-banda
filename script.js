@@ -74,7 +74,7 @@ function printInfo(arrBandits) {
   '<input type="button" id="newBanditButton" class="buttons" value="Добавить нового бандита">';
 
   // добавим обработчики
-
+  console.log(JSON.stringify(arrBandits));
   for (let i=0;i<arrBandits.length;i++){
     let edit='edit'+i;
     let remove='remove'+i;
@@ -324,3 +324,20 @@ document.getElementById("createPerson").addEventListener("click", function() {
 document.getElementById("mainMenu").addEventListener("click",function() {
   display("information");
 });
+
+let fetch_run = () => {
+  const url = "http://localhost:3000/";
+  const url1 = "http://localhost:3000/posts/?id=2&id=4&id=1";
+  // let options = [];
+  // let promise = fetch(url, options);
+
+  let response = fetch(url1);
+
+  if (response.ok) { // если HTTP-статус в диапазоне 200-299
+    // получаем тело ответа (см. про этот метод ниже)
+    let json = response.json();
+    console.log(json);
+  } else {
+    console.error("Ошибка HTTP: " + response.status);
+  }
+}
